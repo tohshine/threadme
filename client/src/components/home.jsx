@@ -45,7 +45,7 @@ const Join = props => {
             <br />
           </h1>
           <h6 className="x-small hr text-center" style={{ color: '#fff' }}>
-            ....for developers & apprenticse
+            ....for developers & apprentice
           </h6>
         </div>
 
