@@ -2,6 +2,7 @@ const express = require('express');
 const socketio = require('socket.io');
 const http = require('http');
 const path = require('path');
+const cors = require('cors');
 
 const PORT = process.env.PORT || 5000;
 
@@ -14,6 +15,7 @@ const io = socketio(server);
 helperUser.userSetup(io);
 
 //app.use(require('./router'));
+app.use(cors());
 
 //serve static asset in production
 if (process.env.NODE_ENV === 'production') {
