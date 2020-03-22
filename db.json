@@ -1,4 +1,22 @@
 {
-  "users": [],
-  "admins": []
+  "users": [
+    {
+      "id": "N8Iwf94udryLgPP-AAAB",
+      "name": "rgb54",
+      "room": "react[intermediate]"
+    },
+    {
+      "id": "sFeHeCKdZwhjGjZsAAAE",
+      "name": "jude",
+      "room": "react[intermediate]"
+    }
+  ],
+  "admins": [
+    {
+      "id": "N8Iwf94udryLgPP-AAAB",
+      "room": "react[intermediate]",
+      "name": "rgb54",
+      "link": "https://github.com/tohshine"
+    }
+  ]
 }
