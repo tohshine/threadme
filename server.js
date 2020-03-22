@@ -13,7 +13,7 @@ const io = socketio(server);
 
 helperUser.userSetup(io);
 
-app.use(require('./router'));
+//app.use(require('./router'));
 
 //serve static asset in production
 if (process.env.NODE_ENV === 'production') {
