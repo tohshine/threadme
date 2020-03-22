@@ -1,45 +1,8 @@
 {
   "users": [
-    {
-      "id": "N8Iwf94udryLgPP-AAAB",
-      "name": "rgb54",
-      "room": "react[intermediate]"
-    },
-    {
-      "id": "sFeHeCKdZwhjGjZsAAAE",
-      "name": "jude",
-      "room": "react[intermediate]"
-    },
-    {
-      "id": "2Ft8YCtVRE9ZaqlsAAAB",
-      "name": "23e4",
-      "room": "4t"
-    }
+    
   ],
   "admins": [
-    {
-      "id": "N8Iwf94udryLgPP-AAAB",
-      "room": "react[intermediate]",
-      "name": "rgb54",
-      "link": "https://github.com/tohshine"
-    },
-    {
-      "id": "p34phlQb0xDZ41JwAAAA",
-      "room": "eeee",
-      "name": "owoeye tosin ajibola",
-      "link": "ertg"
-    },
-    {
-      "id": "2Ft8YCtVRE9ZaqlsAAAB",
-      "room": "4t",
-      "name": "23e4",
-      "link": "5r"
-    },
-    {
-      "id": "dScCWrtXeyJuTTnnAAAD",
-      "room": "kjk",
-      "name": "oiujhj",
-      "link": "pokjk"
-    }
+    
   ]
 }

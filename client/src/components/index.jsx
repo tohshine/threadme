@@ -3,7 +3,7 @@ import Chat from './chat';
 import Join from './home';
 import io from 'socket.io-client';
 let socket;
-const ENDPOINT = 'http://localhost:5000';
+const ENDPOINT = 'http://threadme.herokuapp.com/';
 socket = io(ENDPOINT);
 console.log('index page', socket);
 const Index = () => {
