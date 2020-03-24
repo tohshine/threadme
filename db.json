@@ -1,4 +1,11 @@
 {
   "users": [],
-  "admins": []
+  "admins": [
+    {
+      "id": "-riJO3cubdpNUTvLAAAB",
+      "room": "react",
+      "name": "tosin",
+      "link": "abc.com"
+    }
+  ]
 }

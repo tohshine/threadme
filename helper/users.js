@@ -31,18 +31,22 @@ const createRoom = socket => {
     console.log(room, name, link);
     console.log('in createroom');
 
-    const isRoom = await axios.get('http://localhost:3001/admins');
+    try {
+      const isRoom = await axios.get('http://localhost:5000/admins');
+      const roomExist = isRoom.data.find(
+        rm => rm.room === room && rm.name === name
+      );
+      if (roomExist) {
+        return callback({ error: 'username or room already exist!!!' });
+      }
 
-    const roomExist = isRoom.data.find(
-      rm => rm.room === room && rm.name === name
-    );
-    if (roomExist) {
-      return callback({ error: 'username or room already exist!!!' });
+      const createdRoom = { id: socket.id, room, name, link };
+      await axios.post('http://localhost:5000/admins', createdRoom, config);
+      socket.join(createdRoom.room);
+      callback({ success: 'room was succesfully created' });
+    } catch (error) {
+      console.log(error);
     }
-    const createdRoom = { id: socket.id, room, name, link };
-    await axios.post('http://localhost:3001/admins', createdRoom, config);
-    socket.join(createdRoom.room);
-    callback({ success: 'room was succesfully created' });
   });
 };
 const joinRoom = socket => {
@@ -52,12 +56,12 @@ const joinRoom = socket => {
 
     //const rooms = io.sockets.adapter
     //rooms.rooms.test.length //?to know the population of users in a room
-    const isRoom = await axios.get('http://localhost:3001/admins');
+    const isRoom = await axios.get('http://localhost:5000/admins');
     const roomExist = isRoom.data.find(rm => rm.room === room);
     if (roomExist) {
       const joinedUser = { id: socket.id, name, room };
-      await axios.post('http://localhost:3001/users', joinedUser, config);
-      callback({ success: 'wlcome' });
+      await axios.post('http://localhost:5000/users', joinedUser, config);
+      callback({ success: 'welcome' });
       //greeting new joined user
       socket.emit('message', {
         user: 'admin',
@@ -82,7 +86,7 @@ const sendingMessage = (socket, io) => {
   socket.on('sendMessage', async (message, callback) => {
     console.log('user sent message', socket.id);
 
-    const users = await axios.get('http://localhost:3001/users');
+    const users = await axios.get('http://localhost:5000/users');
     const senderDetails = users.data.find(details => details.id === socket.id);
     if (senderDetails) {
       const { room, name } = senderDetails;
@@ -98,7 +102,7 @@ const sendingMessage = (socket, io) => {
 
 //getting profile of created room owner
 const adminProfile = async socket => {
-  const adminProfile = await axios.get('http://localhost:3001/admins');
+  const adminProfile = await axios.get('http://localhost:5000/admins');
   const profile = adminProfile.data.find(profile => profile.id === socket.id);
   if (profile) {
     socket.emit('profile', { profile });
@@ -106,19 +110,19 @@ const adminProfile = async socket => {
 };
 
 const getUsersInRoom = async socket => {
-  const users = await axios.get('http://localhost:3001/users');
-   console.log('userInROom',users.data);
-   
-  socket.emit('users', { users: users.data });
+  const users = await axios.get('http://localhost:5000/users');
+  console.log('userInROom', users.data);
+
+  return socket.emit('users', { users: users.data });
 };
 
 const getAllRoomName = async socket => {
-  const rooms = await axios.get('http://localhost:3001/admins');
+  const rooms = await axios.get('http://localhost:5000/admins');
   socket.emit('rooms', { rooms: rooms.data });
 };
 
 const removeUser = async (socket, io) => {
-  const users = await axios.get(`http://localhost:3001/users/${socket.id}`);
+  const users = await axios.get(`http://localhost:5000/users/${socket.id}`);
   console.log(users.data);
 
   io.to(users.data.room).emit('message', {
@@ -126,7 +130,7 @@ const removeUser = async (socket, io) => {
     text: `${users.data.name} has left`
   });
 
-  return await axios.delete(`http://localhost:3001/users/${socket.id}`);
+  return await axios.delete(`http://localhost:5000/users/${socket.id}`);
 };
 
 module.exports = { userSetup };
